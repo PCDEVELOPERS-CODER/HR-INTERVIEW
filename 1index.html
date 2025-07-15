@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Bio Data Form</title>
+    <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .container, form {
+    max-width: 1000px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .header img {
+    width: 70px;
+    height: auto;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #2c3e50;
+  }
+
+  h2, h3 {
+    text-align: center;
+    margin-top: 30px;
+    color: #2c3e50;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  input[type="email"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .required-star {
+    color: red;
+    font-weight: bold;
+  }
+
+  button {
+    padding: 12px 30px;
+    font-size: 16px;
+    background-color: #2280e4d5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .clear-btn {
+    background: #ff4d4d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .clear-btn:hover {
+    background-color: #cc0000;
+  }
+
+  .submit-btn {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .add-btn {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .experience-entry hr {
+    margin: 20px 0;
+  }
+
+  .signature-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  #signaturePad {
+    border: 2px dashed #999;
+    border-radius: 6px;
+    background: #fff;
+    width: 100%;
+    max-width: 400px;
+    height: 150px;
+    cursor: crosshair;
+  }
+
+  .signature-buttons {
+    margin-top: 10px;
+  }
+
+  .signature-preview {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    background: #fafafa;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .signature-preview img {
+    max-height: 100px;
+    display: block;
+    margin: auto;
+  }
+
+  #loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #007bff;
+    z-index: 9999;
+    font-weight: bold;
+    backdrop-filter: blur(3px);
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: none;
+    z-index: 10000;
+  }
+
+  /* 📱 Mobile Responsive Adjustments */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    table, thead, tbody, th, td, tr {
+      display: block;
+      width: 100%;
+    }
+
+    tr {
+      margin-bottom: 20px;
+      border: 1px solid #eee;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: #fff;
+    }
+
+    th {
+      background-color: transparent;
+      color: #000;
+      font-weight: bold;
+      padding-top: 10px;
+    }
+
+    td {
+      border: none;
+      padding: 5px 0;
+    }
+
+    button, .clear-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    #signaturePad {
+      height: 120px;
+    }
+  }
+</style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="PC.png" alt="P&C Logo">
+        <h1>P&C PROJECTS PRIVATE LIMITED</h1>
+      </div>
+      <h2>Bio Data of the Applicant</h2>
+      <form id="bioDataForm" novalidate>
+            <table>
+  <tr>
+    <td>Date</td>
+    <td><input type="date" name="date" required></td>
+  </tr>
+  <tr>
+    <td>Applied for the post</td>
+    <td><input type="text" name="post" required></td>
+  </tr>
+  <tr>
+    <td>Name (in capital letters)</td>
+    <td><input type="text" name="name" required></td>
+  </tr>
+  <tr>
+    <td>Date of Birth</td>
+    <td><input type="date" name="dob" required></td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td><input type="number" name="age" required></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td><select name="gender" required><option>Male</option><option>Female</option><option>Other</option></select></td>
+  </tr>
+  <tr>
+    <td>Religion</td>
+    <td><input type="text" name="religion"></td>
+  </tr>
+  <tr>
+    <td>Caste</td>
+    <td><input type="text" name="caste"></td>
+  </tr>
+  <tr>
+    <td>Height (cm)</td>
+    <td><input type="text" name="height"></td>
+  </tr>
+  <tr>
+    <td>Weight (kg)</td>
+    <td><input type="text" name="weight"></td>
+  </tr>
+  <tr>
+    <td>Blood Group</td>
+    <td><input type="text" name="blood_group" required></td>
+  </tr>
+  <tr>
+    <td>Marital Status</td>
+    <td>
+      <select name="marital_status" required>
+        <option>Married</option>
+        <option>Unmarried</option>
+        <option>Widower</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>If Married (Date)</td>
+    <td><input type="date" name="married_date"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Languages Known</th>
+    <th>Speak</th>
+    <th>Write</th>
+  </tr>
+  <tr>
+    <td>Languages</td>
+    <td><input type="text" name="speak_languages" required></td>
+    <td><input type="text" name="write_languages"required></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>Present Address</td>
+    <td><textarea name="present_address" required></textarea></td>
+  </tr>
+  <tr>
+    <td>Permanent Address</td>
+    <td><textarea name="permanent_address" required></textarea></td>
+  </tr>
+  <tr>
+    <td>Pin Code</td>
+    <td><input type="text" name="present_pincode"></td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td><input type="text" name="present_phone" required></td>
+  </tr>
+  <tr>
+    <td>Email ID</td>
+    <td><input type="email" name="email" required></td>
+  </tr>
+  <tr>
+    <td>Aadhar No</td>
+    <td><input type="text" name="aadhar" required></td>
+  </tr>
+  <tr>
+    <td>Emergency Contact Phone No</td>
+    <td><input type="text" name="emergency_phone"></td>
+  </tr>
+  <tr>
+    <td>Name & Relationship</td>
+    <td><input type="text" name="emergency_name"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>ESI No</td>
+    <td><input type="text" name="esi_no"></td>
+    <td>EPF UAN No</td>
+    <td><input type="text" name="epf_no"></td>
+  </tr>
+</table>
+<h3>Educational Qualification</h3>
+<table>
+  <tr>
+    <th rowspan="2">Educational Qualification</th>
+    <th colspan="2">Period of Study</th>
+    <th rowspan="2">Marks %</th>
+    <th colspan="3">Medium</th>
+    <th rowspan="2">Institution name & Location</th>
+  </tr>
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>English</th>
+    <th>Tamil</th>
+    <th>Correspondence</th>
+  </tr>
+
+  <!-- SSLC -->
+  <tr>
+    <td>SSLC / HSC </td>
+    <td><input type="text" name="sslc_from" required></td>
+    <td><input type="text" name="sslc_to"></td>
+    <td><input type="text" name="sslc_marks"></td>
+    <td><input type="checkbox" name="sslc_english"></td>
+    <td><input type="checkbox" name="sslc_tamil"></td>
+    <td><input type="checkbox" name="sslc_corres"></td>
+    <td><input type="text" name="sslc_inst"></td>
+  </tr>
+
+  <!-- Diploma -->
+  <tr>
+    <td>Diploma</td>
+    <td><input type="text" name="dip_from"></td>
+    <td><input type="text" name="dip_to"></td>
+    <td><input type="text" name="dip_marks"></td>
+    <td><input type="checkbox" name="dip_english"></td>
+    <td><input type="checkbox" name="dip_tamil"></td>
+    <td><input type="checkbox" name="dip_corres"></td>
+    <td><input type="text" name="dip_inst"></td>
+  </tr>
+
+  <!-- UG -->
+  <tr>
+    <td>UG</td>
+    <td><input type="text" name="ug_from" required></td>
+    <td><input type="text" name="ug_to"></td>
+    <td><input type="text" name="ug_marks"></td>
+    <td><input type="checkbox" name="ug_english"></td>
+    <td><input type="checkbox" name="ug_tamil"></td>
+    <td><input type="checkbox" name="ug_corres"></td>
+    <td><input type="text" name="ug_inst"></td>
+  </tr>
+
+  <!-- PG -->
+  <tr>
+    <td>PG</td>
+    <td><input type="text" name="pg_from"></td>
+    <td><input type="text" name="pg_to"></td>
+    <td><input type="text" name="pg_marks"></td>
+    <td><input type="checkbox" name="pg_english"></td>
+    <td><input type="checkbox" name="pg_tamil"></td>
+    <td><input type="checkbox" name="pg_corres"></td>
+    <td><input type="text" name="pg_inst"></td>
+  </tr>
+
+  <!-- Other Course -->
+  <tr>
+    <td>Other Course</td>
+    <td><input type="text" name="other_from"></td>
+    <td><input type="text" name="other_to"></td>
+    <td><input type="text" name="other_marks"></td>
+    <td><input type="checkbox" name="other_english"></td>
+    <td><input type="checkbox" name="other_tamil"></td>
+    <td><input type="checkbox" name="other_corres"></td>
+    <td><input type="text" name="other_inst"></td>
+  </tr>
+</table>
+
+<h3>Soft Skills</h3>
+<table border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <tr>
+    <th>Skill</th>
+    <th>Excellent</th>
+    <th>Good</th>
+    <th>Average</th>
+    <th>Only Learned</th>
+    <th>Unknown</th>
+    <th>Professional Exp: Yes / No</th>
+    <th>Years</th>
+  </tr>
+
+  <!-- Row 1 -->
+  <tr>
+    <td>MS Excel working Skill</td>
+    <td><input type="checkbox" name="excel_excellent"></td>
+    <td><input type="checkbox" name="excel_good"></td>
+    <td><input type="checkbox" name="excel_average"></td>
+    <td><input type="checkbox" name="excel_learned"></td>
+    <td><input type="checkbox" name="excel_unknown"></td>
+    <td>
+      <select name="excel_exp">
+        <option value="">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </td>
+    <td><input type="number" name="excel_years" min="0" style="width: 60px;"></td>
+  </tr>
+
+  <!-- Row 2 -->
+  <tr>
+    <td>ACAD</td>
+    <td><input type="checkbox" name="acad_excellent"></td>
+    <td><input type="checkbox" name="acad_good"></td>
+    <td><input type="checkbox" name="acad_average"></td>
+    <td><input type="checkbox" name="acad_learned"></td>
+    <td><input type="checkbox" name="acad_unknown"></td>
+    <td>
+      <select name="acad_exp">
+        <option value="">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </td>
+    <td><input type="number" name="acad_years" min="0" style="width: 60px;"></td>
+  </tr>
+
+  <!-- Row 3 -->
+  <tr>
+    <td>Typing Skill: English/Tamil</td>
+    <td><input type="checkbox" name="typing_excellent"></td>
+    <td><input type="checkbox" name="typing_good"></td>
+    <td><input type="checkbox" name="typing_average"></td>
+    <td><input type="checkbox" name="typing_learned"></td>
+    <td><input type="checkbox" name="typing_unknown"></td>
+    <td>
+      <select name="typing_exp">
+        <option value="">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </td>
+    <td><input type="number" name="typing_years" min="0" style="width: 60px;"></td>
+  </tr>
+
+  <!-- Row 4 -->
+  <tr>
+    <td>General Knowledge</td>
+    <td><input type="checkbox" name="gk_excellent"></td>
+    <td><input type="checkbox" name="gk_good"></td>
+    <td><input type="checkbox" name="gk_average"></td>
+    <td><input type="checkbox" name="gk_learned"></td>
+    <td><input type="checkbox" name="gk_unknown"></td>
+    <td>
+      <select name="gk_exp">
+        <option value="">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </td>
+    <td><input type="number" name="gk_years" min="0" style="width: 60px;"></td>
+  </tr>
+</table>
+<!-- 2nd page-->
+<!-- 2nd page -->
+<h3>Other Details</h3>
+<table>
+  <tr>
+    <th>Are you willing to work anywhere in India / TN / At particular place</th>
+    <td><input type="text" name="work_location_preference" /></td>
+  </tr>
+  <tr>
+    <th>Will you stay in site camp?</th>
+    <td><input type="text" name="site_camp" /></td>
+  </tr>
+  <tr>
+    <th>What Vehicle owned by you<br>(Two wheeler / Four wheeler)</th>
+    <td>
+      <input type="text" name="vehicle_owned" />
+      &nbsp;&nbsp;License No: <input type="text" name="license_no" />
+    </td>
+  </tr>
+  <tr>
+    <th>Do you have any health problems / Complaints / Physically Challenged?</th>
+    <td><input type="text" name="health_issues" /></td>
+  </tr>
+  <tr>
+    <th>Present Employer, Location & Post</th>
+    <td><input type="text" name="current_employer" /></td>
+  </tr>
+  <tr>
+    <th>Reason for leaving the present employment</th>
+    <td><input type="text" name="reason_for_leaving" /></td>
+  </tr>
+  <tr>
+    <th>How do you know this company?</th>
+    <td><input type="text" name="know_company" /></td>
+  </tr>
+  <tr>
+    <th>Give any two references<br>Name / Grade / Designation / Company / Contact Phone No</th>
+    <td>
+      1) <input type="text" name="reference1" style="width: 100%;" /><br><br>
+      2) <input type="text" name="reference2" style="width: 100%;" />
+    </td>
+  </tr>
+</table>
+
+<h3>Family Details</h3>
+<table>
+  <tr>
+    <th>Sl.</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Relationship</th>
+    <th>Marital Status</th>
+    <th>Occupation</th>
+    <th>Location</th>
+    <th>Ph. Number</th>
+  </tr>
+  <tr><td>1</td><td><input type="text" name="fam_name_1"></td><td><input type="text" name="fam_age_1"></td><td><input type="text" name="fam_relationship_1"></td><td><input type="text" name="fam_status_1"></td><td><input type="text" name="fam_occupation_1"></td><td><input type="text" name="fam_location_1"></td><td><input type="text" name="fam_phone_1"></td></tr>
+  <tr><td>2</td><td><input type="text" name="fam_name_2"></td><td><input type="text" name="fam_age_2"></td><td><input type="text" name="fam_relationship_2"></td><td><input type="text" name="fam_status_2"></td><td><input type="text" name="fam_occupation_2"></td><td><input type="text" name="fam_location_2"></td><td><input type="text" name="fam_phone_2"></td></tr>
+  <tr><td>3</td><td><input type="text" name="fam_name_3"></td><td><input type="text" name="fam_age_3"></td><td><input type="text" name="fam_relationship_3"></td><td><input type="text" name="fam_status_3"></td><td><input type="text" name="fam_occupation_3"></td><td><input type="text" name="fam_location_3"></td><td><input type="text" name="fam_phone_3"></td></tr>
+  <tr><td>4</td><td><input type="text" name="fam_name_4"></td><td><input type="text" name="fam_age_4"></td><td><input type="text" name="fam_relationship_4"></td><td><input type="text" name="fam_status_4"></td><td><input type="text" name="fam_occupation_4"></td><td><input type="text" name="fam_location_4"></td><td><input type="text" name="fam_phone_4"></td></tr>
+  <tr><td>5</td><td><input type="text" name="fam_name_5"></td><td><input type="text" name="fam_age_5"></td><td><input type="text" name="fam_relationship_5"></td><td><input type="text" name="fam_status_5"></td><td><input type="text" name="fam_occupation_5"></td><td><input type="text" name="fam_location_5"></td><td><input type="text" name="fam_phone_5"></td></tr>
+  <tr><td>6</td><td><input type="text" name="fam_name_6"></td><td><input type="text" name="fam_age_6"></td><td><input type="text" name="fam_relationship_6"></td><td><input type="text" name="fam_status_6"></td><td><input type="text" name="fam_occupation_6"></td><td><input type="text" name="fam_location_6"></td><td><input type="text" name="fam_phone_6"></td></tr>
+  <tr><td>7</td><td><input type="text" name="fam_name_7"></td><td><input type="text" name="fam_age_7"></td><td><input type="text" name="fam_relationship_7"></td><td><input type="text" name="fam_status_7"></td><td><input type="text" name="fam_occupation_7"></td><td><input type="text" name="fam_location_7"></td><td><input type="text" name="fam_phone_7"></td></tr>
+  <tr><td>8</td><td><input type="text" name="fam_name_8"></td><td><input type="text" name="fam_age_8"></td><td><input type="text" name="fam_relationship_8"></td><td><input type="text" name="fam_status_8"></td><td><input type="text" name="fam_occupation_8"></td><td><input type="text" name="fam_location_8"></td><td><input type="text" name="fam_phone_8"></td></tr>
+</table>
+
+<h3>Details of Recommendation</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Relative / Friends / Colleagues / Occupation of referer</th>
+    <th>Mobile No</th>
+  </tr>
+  <tr>
+    <td><input type="text" name="recommend_name1"></td>
+    <td><input type="text" name="recommend_relation1"></td>
+    <td><input type="text" name="recommend_mobile1"></td>
+  </tr>
+  <tr>
+    <td><input type="text" name="recommend_name2"></td>
+    <td><input type="text" name="recommend_relation2"></td>
+    <td><input type="text" name="recommend_mobile2"></td>
+  </tr>
+</table>
+
+<p>
+  The above details furnished by me are true to the best of my knowledge and in the event of any wrong information, the management can take needful action.
+</p>
+
+<table class="noborder" style="width: 100%;">
+  <tr>
+    <td style="width: 50%;">Place: <input type="text" name="place"></td>
+    
+  </tr>
+  <tr>
+    <td>Date: <input type="date" name="signed_date"></td>
+    <td></td>
+  </tr>
+</table>
+<h3>Employment & Experience Details (in Reverse Chronological Order) </h3>
+
+<div id="experience-section" >
+  <div class="experience-entry">
+    <table>
+      <tr>
+        <th colspan="2">1. Previous Company name & Head Office Location</th>
+        <td colspan="4"><input type="text" name="prev_company[]" required/></td>
+      </tr>
+      <tr>
+        <th colspan="2">2. Project name & Location</th>
+        <td colspan="4"><input type="text" name="project_name[]"required /></td>
+      </tr>
+      <tr>
+        <th colspan="2">3. Project Value (crores)</th>
+        <td colspan="4"><input type="text" name="project_value[]" /></td>
+      </tr>
+      <tr>
+        <th colspan="2">4. Designation</th>
+        <td colspan="4"><input type="text" name="designation[]" required/></td>
+      </tr>
+      <tr>
+        <th colspan="2">5. Roles & Responsibility</th>
+        <td colspan="4"><textarea name="responsibility[]" rows="3" style="width:100%" required></textarea></td>
+      </tr>
+      <tr>
+        <th colspan="2">6. Working Period</th>
+        <td>From: <input type="date" name="work_from[]" required/></td>
+        <td>To: <input type="date" name="work_to[]" required/></td>
+        <td colspan="2">Total: <input type="text" name="work_total_years[]" style="width:50px" required/> Years</td>
+      </tr>
+    </table>
+    <hr>
+  </div>
+</div>
+
+<div style="margin-bottom: 20px; text-align: right;">
+  <button type="button" onclick="addExperience()">➕ Add More Experience</button>
+</div>
+
+<div class="signature-container">
+  <label for="signaturePad">Draw Your Signature:</label>
+  <canvas id="signaturePad" width="300" height="120" required></canvas>
+
+  <div class="signature-buttons">
+    <button type="button" onclick="clearSignature()" class="clear-btn">🧹 Clear</button>
+  </div>
+
+  <input type="hidden" name="signatureData" id="signatureData">
+
+  <div class="signature-preview">
+    <img id="signatureImage" alt="Signature Preview" />
+  </div>
+</div>
+
+
+
+
+
+
+
+        <div class="submit-btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <div id="loading" style="display:none;">Uploading...</div>
+      <div id="response" style="margin-top: 20px;"></div>
+    </div>
+
+ <script>
+  // 🖊️ Signature Drawing Logic
+  const canvas = document.getElementById('signaturePad');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+
+  canvas.addEventListener('mousedown', () => isDrawing = true);
+  canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+    saveSignatureToForm();
+  });
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+  canvas.addEventListener('mousemove', draw);
+
+  function draw(e) {
+    if (!isDrawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#000';
+    const rect = canvas.getBoundingClientRect();
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+  }
+
+  function clearSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('signatureData').value = '';
+    document.getElementById('signatureImage').src = '';
+  }
+
+  function saveSignatureToForm() {
+    const dataURL = canvas.toDataURL();
+    document.getElementById('signatureData').value = dataURL;
+    document.getElementById('signatureImage').src = dataURL;
+  }
+
+  // ⭐ Add red * to fields marked required (auto on load)
+  document.querySelectorAll("tr").forEach(row => {
+    const labelTd = row.cells[0];
+    const inputTd = row.cells[1];
+    if (!labelTd || !inputTd) return;
+    const requiredInput = inputTd.querySelector("input[required], textarea[required], select[required]");
+    if (requiredInput && !labelTd.innerHTML.includes("required-star")) {
+      labelTd.innerHTML += ' <span class="required-star">*</span>';
+    }
+  });
+
+  // ✅ Form Submit Handling
+  document.getElementById('bioDataForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const loading = document.getElementById("loading");
+    loading.style.display = "flex";
+
+    // ✅ Check only fields whose labels have the * marker
+    let valid = true;
+    const requiredFields = [];
+
+    document.querySelectorAll('tr').forEach(row => {
+      const labelCell = row.cells[0];
+      const inputCell = row.cells[1];
+      if (!labelCell || !inputCell) return;
+      const isRequired = labelCell.innerHTML.includes('required-star');
+      if (!isRequired) return;
+
+      const field = inputCell.querySelector("input, select, textarea");
+      if (!field || field.disabled || field.offsetParent === null) return;
+
+      let isValid = true;
+      if (field.type === "file") {
+        isValid = field.files.length > 0;
+      } else if (field.type === "checkbox" || field.type === "radio") {
+        isValid = field.checked;
+      } else {
+        isValid = field.value.trim() !== "";
+      }
+
+      if (!isValid) {
+        field.style.border = "2px solid red";
+        valid = false;
+      } else {
+        field.style.border = "";
+      }
+    });
+
+    if (!valid) {
+      alert("⚠️ Please fill all fields marked with *");
+      loading.style.display = "none";
+      return;
+    }
+
+    // Save signature
+    saveSignatureToForm();
+
+    try {
+      const formData = new FormData(form);
+
+      // Clone form for HTML-to-PDF generation
+      const clone = form.cloneNode(true);
+      clone.querySelectorAll('input, select, textarea').forEach(el => {
+        const span = document.createElement('span');
+        if (el.type === 'file') {
+          span.textContent = el.files.length > 0 ? el.files[0].name : 'No file';
+        } else if (el.type === 'checkbox') {
+          span.textContent = el.checked ? '✔️' : '❌';
+        } else {
+          span.textContent = el.value || '—';
+        }
+        el.parentNode.replaceChild(span, el);
+      });
+
+      // Clean up for PDF
+      clone.querySelectorAll('#signaturePad, #signatureData, button[type="submit"], .clear-btn, label[for="signatureData"]').forEach(el => {
+        if (el) el.remove();
+      });
+
+      const styleBlock = `
+        <style>
+          body { font-family: 'Segoe UI', sans-serif; color: #333; }
+          .header { display: flex; align-items: center; gap: 15px; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+          .header img { width: 70px; }
+          h1 { font-size: 24px; margin: 0; color: #2c3e50; }
+          h2 { text-align: center; color: #2c3e50; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+          th { background: #eee; }
+        </style>
+      `;
+
+      const fullContent = `
+        ${styleBlock}
+        <div class="header">
+          <img src="PC.png" alt="P&C Logo">
+          <h1>P&C PROJECTS PRIVATE LIMITED</h1>
+        </div>
+        <h2>Bio Data of the Applicant</h2>
+        ${clone.innerHTML}
+      `;
+
+      formData.append("formHtml", fullContent);
+
+      // 🔄 POST to your Google Apps Script
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwSYQxYDOiNttCQsbNpOu24rjyjEb__113Q-_qzaAM9IneiiuNASHzjlYO7jzN5BZiX/exec", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.status === "success") {
+        alert("✅ Form submitted successfully!");
+        form.reset();
+        clearSignature();
+      } else {
+        alert("❌ Upload failed: " + result.message);
+      }
+
+    } catch (err) {
+      alert("⚠️ Error: " + err.message);
+    } finally {
+      loading.style.display = "none";
+    }
+  });
+
+  // ➕ Add More Experience Logic
+  function addExperience() {
+    const container = document.getElementById("experience-section");
+    const firstEntry = container.querySelector(".experience-entry");
+    const newEntry = firstEntry.cloneNode(true);
+    newEntry.querySelectorAll("input, textarea").forEach(el => el.value = "");
+    container.appendChild(newEntry);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
