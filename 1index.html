@@ -209,46 +209,66 @@
   }
 
   /* 📱 Mobile Responsive Adjustments */
-  @media (max-width: 768px) {
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    table, thead, tbody, th, td, tr {
-      display: block;
-      width: 100%;
-    }
-
-    tr {
-      margin-bottom: 20px;
-      border: 1px solid #eee;
-      padding: 10px;
-      border-radius: 6px;
-      background-color: #fff;
-    }
-
-    th {
-      background-color: transparent;
-      color: #000;
-      font-weight: bold;
-      padding-top: 10px;
-    }
-
-    td {
-      border: none;
-      padding: 5px 0;
-    }
-
-    button, .clear-btn {
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    #signaturePad {
-      height: 120px;
-    }
+ /* 📱 Mobile Responsive Adjustments */
+@media (max-width: 770px) {
+  body {
+    font-size: 16px; /* Improves overall readability on mobile */
   }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+
+  th, td {
+    font-size: 16px; /* 👈 Larger text on small screens */
+    line-height: 1.5;
+  }
+
+  label, input, select, textarea {
+    font-size: 16px;
+  }
+
+  button, .clear-btn {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  h2, h3 {
+    font-size: 20px;
+  }
+
+  #signaturePad {
+    width: 100%;
+    height: 140px; /* ✅ Slightly larger for easier drawing */
+    touch-action: none; /* ✅ Ensures touch gestures work */
+  }
+
+  .signature-container {
+    width: 100%;
+  }
+
+  .signature-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 </style>
 
   </head>
@@ -680,19 +700,17 @@
 </div>
 
 <div class="signature-container">
-  <label for="signaturePad">Draw Your Signature:</label>
-  <canvas id="signaturePad" width="300" height="120" required></canvas>
-
+  <label>Draw Signature <span class="required-star">*</span></label>
+  <canvas id="signaturePad" style="width: 100%; height: 150px; border: 1px solid #aaa;"></canvas>
   <div class="signature-buttons">
-    <button type="button" onclick="clearSignature()" class="clear-btn">🧹 Clear</button>
+    <button type="button" class="clear-btn" onclick="clearSignature()">Clear</button>
   </div>
-
-  <input type="hidden" name="signatureData" id="signatureData">
-
+  <input type="hidden" id="signatureData" name="signatureData">
   <div class="signature-preview">
     <img id="signatureImage" alt="Signature Preview" />
   </div>
 </div>
+
 
 
 
@@ -710,11 +728,11 @@
 
  <script>
   // 🖊️ Signature Drawing Logic
- const canvas = document.getElementById('signaturePad');
+const canvas = document.getElementById('signaturePad');
   const ctx = canvas.getContext('2d');
   let isDrawing = false;
 
-  // Resize canvas to fit device pixel ratio
+  // Resize canvas for HD screens
   function resizeCanvas() {
     const ratio = window.devicePixelRatio || 1;
     const width = canvas.offsetWidth;
@@ -726,9 +744,9 @@
 
   resizeCanvas();
 
-  function getXY(e) {
+  function getCoordinates(e) {
     const rect = canvas.getBoundingClientRect();
-    if (e.touches) {
+    if (e.touches && e.touches.length > 0) {
       return {
         x: e.touches[0].clientX - rect.left,
         y: e.touches[0].clientY - rect.top
@@ -742,16 +760,17 @@
   }
 
   function startDrawing(e) {
+    e.preventDefault();
     isDrawing = true;
-    const { x, y } = getXY(e);
+    const { x, y } = getCoordinates(e);
     ctx.beginPath();
     ctx.moveTo(x, y);
-    e.preventDefault();
   }
 
   function draw(e) {
     if (!isDrawing) return;
-    const { x, y } = getXY(e);
+    e.preventDefault();
+    const { x, y } = getCoordinates(e);
     ctx.lineTo(x, y);
     ctx.strokeStyle = '#000';
     ctx.lineWidth = 2;
@@ -759,49 +778,47 @@
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(x, y);
-    e.preventDefault();
   }
 
   function stopDrawing(e) {
     if (!isDrawing) return;
+    e.preventDefault();
     isDrawing = false;
     ctx.beginPath();
     saveSignatureToForm();
-    e.preventDefault();
   }
 
-  // 🖱️ Mouse events
+  // ✅ Mouse events
   canvas.addEventListener('mousedown', startDrawing);
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', stopDrawing);
   canvas.addEventListener('mouseleave', stopDrawing);
 
-  // 📱 Touch events
+  // ✅ Touch events (with { passive: false } to allow preventDefault)
   canvas.addEventListener('touchstart', startDrawing, { passive: false });
   canvas.addEventListener('touchmove', draw, { passive: false });
   canvas.addEventListener('touchend', stopDrawing, { passive: false });
+  canvas.addEventListener('touchcancel', stopDrawing, { passive: false });
 
-  // Clear button logic
-  function clearSignature() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById('signatureData').value = '';
-    document.getElementById('signatureImage').src = '';
-  }
-
-  // Save to base64 string
+  // ✅ Save as base64 and preview
   function saveSignatureToForm() {
     const dataURL = canvas.toDataURL('image/png');
     document.getElementById('signatureData').value = dataURL;
     document.getElementById('signatureImage').src = dataURL;
   }
 
-  // Optional: re-resize on window change
-  window.addEventListener("resize", () => {
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    resizeCanvas();
-    ctx.putImageData(imageData, 0, 0);
-  });
+  function clearSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('signatureData').value = '';
+    document.getElementById('signatureImage').src = '';
+  }
 
+  // Optional: keep signature when resizing
+  window.addEventListener("resize", () => {
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    resizeCanvas();
+    ctx.putImageData(imgData, 0, 0);
+  });
 
 
 
