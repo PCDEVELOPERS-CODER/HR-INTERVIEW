@@ -710,41 +710,100 @@
 
  <script>
   // 🖊️ Signature Drawing Logic
-  const canvas = document.getElementById('signaturePad');
+ const canvas = document.getElementById('signaturePad');
   const ctx = canvas.getContext('2d');
   let isDrawing = false;
 
-  canvas.addEventListener('mousedown', () => isDrawing = true);
-  canvas.addEventListener('mouseup', () => {
-    isDrawing = false;
-    saveSignatureToForm();
-  });
-  canvas.addEventListener('mouseout', () => isDrawing = false);
-  canvas.addEventListener('mousemove', draw);
+  // Resize canvas to fit device pixel ratio
+  function resizeCanvas() {
+    const ratio = window.devicePixelRatio || 1;
+    const width = canvas.offsetWidth;
+    const height = canvas.offsetHeight;
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  resizeCanvas();
+
+  function getXY(e) {
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches) {
+      return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top
+      };
+    } else {
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+  }
+
+  function startDrawing(e) {
+    isDrawing = true;
+    const { x, y } = getXY(e);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    e.preventDefault();
+  }
 
   function draw(e) {
     if (!isDrawing) return;
+    const { x, y } = getXY(e);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = '#000';
     ctx.lineWidth = 2;
     ctx.lineCap = 'round';
-    ctx.strokeStyle = '#000';
-    const rect = canvas.getBoundingClientRect();
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.moveTo(x, y);
+    e.preventDefault();
   }
 
+  function stopDrawing(e) {
+    if (!isDrawing) return;
+    isDrawing = false;
+    ctx.beginPath();
+    saveSignatureToForm();
+    e.preventDefault();
+  }
+
+  // 🖱️ Mouse events
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseleave', stopDrawing);
+
+  // 📱 Touch events
+  canvas.addEventListener('touchstart', startDrawing, { passive: false });
+  canvas.addEventListener('touchmove', draw, { passive: false });
+  canvas.addEventListener('touchend', stopDrawing, { passive: false });
+
+  // Clear button logic
   function clearSignature() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById('signatureData').value = '';
     document.getElementById('signatureImage').src = '';
   }
 
+  // Save to base64 string
   function saveSignatureToForm() {
-    const dataURL = canvas.toDataURL();
+    const dataURL = canvas.toDataURL('image/png');
     document.getElementById('signatureData').value = dataURL;
     document.getElementById('signatureImage').src = dataURL;
   }
+
+  // Optional: re-resize on window change
+  window.addEventListener("resize", () => {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    resizeCanvas();
+    ctx.putImageData(imageData, 0, 0);
+  });
+
+
+
 
   // ⭐ Add red * to fields marked required (auto on load)
   document.querySelectorAll("tr").forEach(row => {
