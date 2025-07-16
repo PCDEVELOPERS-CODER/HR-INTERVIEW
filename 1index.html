@@ -971,14 +971,14 @@ const canvas = document.getElementById('signaturePad');
       `;
 
       const fullContent = `
-        ${styleBlock}
-        <div class="header">
-          <img src="PC.png" alt="P&C Logo">
-          <h1>P&C PROJECTS PRIVATE LIMITED</h1>
-        </div>
-        <h2>Bio Data of the Applicant</h2>
-        ${clone.innerHTML}
-      `;
+  ${styleBlock}
+  <div class="header">
+    <img src="PC.png" alt="P&C Logo">
+    <h1>P&C PROJECTS PRIVATE LIMITED</h1>
+  </div>
+  <h2>Bio Data of the Applicant</h2>
+  ${clone.outerHTML}
+`;
 
       formData.append("formHtml", fullContent);
 
