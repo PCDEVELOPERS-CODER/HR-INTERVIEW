@@ -937,8 +937,8 @@ const canvas = document.getElementById('signaturePad');
       const formData = new FormData(form);
 
       // Clone form for HTML-to-PDF generation
-     const clone = document.createElement("div");
-     clone.innerHTML = form.innerHTML;
+   const clone = form.cloneNode(true);
+
 
       clone.querySelectorAll('input, select, textarea').forEach(el => {
         const span = document.createElement('span');
