@@ -894,7 +894,7 @@ const canvas = document.getElementById('signaturePad');
     loading.style.display = "flex";
 
     // ✅ Check only fields whose labels have the * marker
-    let valid = true;
+    /*let valid = true;
     const requiredFields = [];
 
     document.querySelectorAll('tr').forEach(row => {
@@ -928,7 +928,7 @@ const canvas = document.getElementById('signaturePad');
       alert("⚠️ Please fill all fields marked with *");
       loading.style.display = "none";
       return;
-    }
+    }*/
 
     // Save signature
     saveSignatureToForm();
@@ -981,7 +981,7 @@ const canvas = document.getElementById('signaturePad');
       formData.append("formHtml", fullContent);
 
       // 🔄 POST to your Google Apps Script
-      const response = await fetch("https://script.google.com/macros/s/AKfycbwSYQxYDOiNttCQsbNpOu24rjyjEb__113Q-_qzaAM9IneiiuNASHzjlYO7jzN5BZiX/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbz12G5ekbFtosIEX1FLvPBof2MCAIGj_Ol7l6zQurF7wwiiHk5IPYN1-kOqij7sRti5/exec", {
         method: "POST",
         body: formData,
       });
