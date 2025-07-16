@@ -229,51 +229,97 @@
   }
 
   /* ✅ Responsive Design */
-  @media (max-width: 1024px) {
-    body {
-      font-size: 30px;
-      padding: 10px;
-    }
-
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-      position: sticky;
-      top: 0;
-      background: #fff;
-      z-index: 10;
-    }
-
-    .container, form {
-      padding: 20px;
-    }
-
-    table {
-      font-size: 18px;
-    }
-
-    th, td {
-      font-size: 30px;
-    }
-
-    button, .clear-btn {
-      width: 100%;
-      font-size: 18px;
-      margin-top: 12px;
-    }
-
-    h2, h3 {
-      font-size: 22px;
-    }
-
-    #signaturePad {
-      height: 400px;
-    }
-
-    .signature-preview {
-      height: 170px;
-    }
+ /* 📱 Mobile-Friendly TNPSC Style Font & Layout Fix */
+@media (max-width: 770px) {
+  body {
+    font-size: 18px; /* TNPSC-friendly */
+    padding: 10px;
   }
+
+  .container, form {
+    padding: 10px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .header img {
+    width: 60px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  h2, h3 {
+    font-size: 20px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  table {
+    font-size: 16px;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fafafa;
+  }
+
+  th, td {
+    font-size: 16px;
+    border: none;
+    padding: 6px 0;
+  }
+
+  th {
+    background: none;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  input[type="email"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  button, .clear-btn {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 12px;
+  }
+
+  #signaturePad {
+    height: 300px;
+  }
+
+  .signature-preview {
+    height: 150px;
+  }
+}
+
 </style>
 
 
@@ -653,9 +699,7 @@
   </tr>
 </table>
 
-<p>
-  The above details furnished by me are true to the best of my knowledge and in the event of any wrong information, the management can take needful action.
-</p>
+
 
 <table class="noborder" style="width: 100%;">
   <tr>
