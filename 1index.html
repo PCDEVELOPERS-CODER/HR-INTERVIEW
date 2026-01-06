@@ -1378,7 +1378,7 @@ async function submitCandidateForm(event) {
     formData.append("physically_challenged_details", document.querySelector('input[name="physically_challenged_details"]')?.value || "");
     formData.append("relative_type", document.querySelector('input[name="relative_type"]')?.value || "");
 
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbxAP4lPhUzN--opzT05WgXKwJp0X7JGhD67Q_FIyKIgjkW6u6tYvmO8b3ECSOPbPd1Q/exec";
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbzQsXkxTc2kZCWDZ3EuIM11OfnKBwgRssiCGxsr2tKfvO4fzC1ubJLKhRFGLckWpkA/exec";
     const response = await fetch(GAS_URL, { 
       method: "POST",
       body: formData,
@@ -1527,4 +1527,5 @@ function generateProfessionalPDF() {
   </script>
 </body>
 </html>
+
 
