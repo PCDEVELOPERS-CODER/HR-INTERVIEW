@@ -286,9 +286,9 @@ td:after,
   <input type="text" name="full_name" id="full_name" required>
 </label>
 
-<!-- Year of Birth -->
-<label for="dob_year">Year of Birth
-  <input type="number" name="dob_year" id="dob_year" min="1900" max="2024" required>
+<!-- Date of Birth -->
+<label for="dob_year"> Date of Birth
+  <input type="text" name="dob_year" id="dob_year" required>
 </label>
 
 <!-- Marital Status -->
@@ -303,12 +303,12 @@ td:after,
 <!-- Marriage Year -->
 <div id="marriageYearField" style="display: none;">
   <label for="marriage_year">Marriage Year
-    <input type="number" name="marriage_year" id="marriage_year" min="1900" max="2024">
+    <input type="number" name="marriage_year" id="marriage_year" min="1900" max="2025">
   </label>
 </div>
 
 <!-- Applied Post -->
-<label for="applied_post">Applied for the Post:
+<label for="applied_post">Posted As:
   <input type="text" name="applied_post" id="applied_post" required>
 </label>
 
@@ -410,16 +410,16 @@ td:after,
   <div class="experience-table">
     <label><b>Experience Details</b></label>
     <div class="input-group">
-        <input type="text" id="projectname" placeholder="Project Name">
-        <input type="text" id="projectlocation" placeholder="Project Location">
-        <input type="text" id="projectvalue" placeholder="Project Value">
+        <input type="text" id="projectname" placeholder="Project Name" >
+        <input type="text" id="projectlocation" placeholder="Project Location" >
+        <input type="text" id="projectvalue" placeholder="Project Value" >
         <input type="text" id="previouscompany" placeholder="Company Name">
-        <input type="text" id="companyoffice" placeholder="Company Head Office City">
-        <input type="text" id="designation" placeholder="Designation">
-        <input type="text" id="role" placeholder="Roles & Responsibilities">
+        <input type="text" id="companyoffice" placeholder="Company Head Office City" >
+        <input type="text" id="designation" placeholder="Designation" >
+        <input type="text" id="role" placeholder="Roles & Responsibilities" >
 
 <label for="frommonth">From Year:</label>
-<input type="month" id="frommonth" name="frommonth">
+<input type="month" id="frommonth" name="frommonth" >
 
 <label for="tomonth">To Year:</label>
 <input type="month" id="tomonth" name="tomonth" onblur="validateMonths()">
@@ -442,11 +442,11 @@ td:after,
   </div>
 
   <!-- Experience Preview -->
-  <ul id="experiencePreview" style="margin-top: 10px;"></ul>
+  <ul id="experiencePreview" style="margin-top: 10px;" ></ul>
 
   <!-- Total Experience -->
   <label>Total Experience (in Years):
-    <input type="text" name="total_experience" id="totalExperience" readonly style="width: 60px;">
+    <input type="text" name="total_experience" id="totalExperience" readonly style="width: 60px;" required>
   </label>
 </div>
 
@@ -456,7 +456,7 @@ td:after,
     <h3>Education:</h3>
     <td data-label="Qualification">
   <label for="qual"> </label>
-  <select id="qual" onchange="updateStreamOptions(); toggleOther(this, 'qual_other'); toggleBoardUniversity()">
+  <select id="qual" onchange="updateStreamOptions(); toggleOther(this, 'qual_other'); toggleBoardUniversity()" >
     <option value="">Select</option>
     <option value="SSLC">SSLC</option>
     <option value="HSC">HSC</option>
@@ -470,7 +470,7 @@ td:after,
 
     <td data-label="Specialization">
       <label> </label>
-      <select id="stream" onchange="toggleOther(this, 'stream_other')">
+      <select id="stream" onchange="toggleOther(this, 'stream_other')" >
         <option value="">Select</option>
       </select>
       <input type="text" id="stream_other" placeholder="Specify Other" style="display:none">
@@ -478,7 +478,7 @@ td:after,
 
     <td data-label="From">
       <label> </label>
-      <input type="number" id="from" name="from" placeholder="YYYY" min="1900" max="2100">
+      <input type="number" id="from" name="from" placeholder="YYYY" min="1900" max="2100" >
     </td>
 
     <td data-label="To">
@@ -500,7 +500,7 @@ td:after,
 
     <td data-label="Medium">
       <label> </label>
-      <select id="medium" onchange="toggleOther(this, 'medium_other')">
+      <select id="medium" onchange="toggleOther(this, 'medium_other')" >
         <option value="">Select</option>
         <option value="Tamil">Tamil</option>
         <option value="English">English</option>
@@ -512,7 +512,7 @@ td:after,
 
    <td data-label="Board/University">
   <label for="board"> </label>
-  <select id="board" onchange="toggleOther(this, 'board_other')">
+  <select id="board" onchange="toggleOther(this, 'board_other')" >
     <option value="">Select</option>
     <option value="CBSE">CBSE</option>
     <option value="Matric">Matric</option>
@@ -529,12 +529,12 @@ td:after,
 
 <td data-label="College/School">
   <label> </label>
-  <input type="text" id="university" placeholder="College/School">
+  <input type="text" id="university" placeholder="College/School" >
 </td>
 
     <td data-label="Mode">
       <label> </label>
-      <select id="mode">
+      <select id="mode" >
          <option value="">Select</option>
         <option value="Regular">Regular</option>
         <option value="Correspondence">Correspondence</option>
@@ -546,20 +546,19 @@ td:after,
   <button type="button" onclick="addEducationPreview()"> +Add</button>
 
   <h3>Education Preview</h3>
-<div id="educationPreviewContainer"></div>
+<div id="educationPreviewContainer" aria-required="true"></div>
 
   <h3>Family Details</h3>
 <table id="familyTable">
   <tbody id="familyBody">
     <tr>
       <td data-label="Relationship"><input type="text" id="frel" placeholder=" "></td>
-      <td data-label="Name"><input type="text" id="fname" placeholder=" "></td>
-      <td data-label="Age"><input type="text" id="fage" placeholder=" "></td>
-      <td data-label="Occupation"><input type="text" id="focc" placeholder=" "></td>
-      <td data-label="Marital Status"><input type="text" id="fmarital" placeholder=" "></td>
-      <td data-label="House Location"><input type="text" id="floc" placeholder=" "></td>
-      <td data-label="Mobile Number"><input type="text" id="fph" placeholder=" "></td>
-
+      <td data-label="Name"><input type="text" id="fname" placeholder=" " ></td>
+      <td data-label="Age"><input type="text" id="fage" placeholder=" " ></td>
+      <td data-label="Occupation"><input type="text" id="focc" placeholder=" " ></td>
+      <td data-label="Marital Status"><input type="text" id="fmarital" placeholder=" " ></td>
+      <td data-label="House Location"><input type="text" id="floc" placeholder=" " ></td>
+      <td data-label="Mobile Number"><input type="text" id="fph" placeholder=" " ></td>
     </tr>
   </tbody>
 </table>
@@ -573,7 +572,7 @@ td:after,
     <tr>
       <td data-label="Skill">
         <label></label>
-        <select id="skillSelect" onchange="toggleOtherSkill(this)">
+        <select id="skillSelect" onchange="toggleOtherSkill(this)" >
           <option value="">Select..</option>
           <option value="Excel">Excel</option>
            <option value="AutoCAD">AutoCAD</option>
@@ -593,7 +592,7 @@ td:after,
       </td>
       <td data-label="Proficiency">
         <label></label>
-        <select id="skillProficiency">
+        <select id="skillProficiency" >
           <option value="Excellent">Excellent</option>
           <option value="Good">Good</option>
           <option value="Average">Average</option>
@@ -608,40 +607,34 @@ td:after,
      </td>
 
 <!-- Preview Container -->
-<div id="skillPreviewContainer" style="margin-top: 20px;">
+<div id="skillPreviewContainer" style="margin-top: 20px;" aria-required="true">
   <h4>Skills Preview</h4>
 </div>
 
 <h3>Other Details</h3>
 
 <!-- 1-5 Questions -->
-<label>1. Willing to work anywhere in India?
-  <select name="willing_india" required>
-    <option value="">Select</option>
-    <option>Yes</option><option>No</option>
-  </select>
-</label>
 
-<label>2. Willing to work in Tamil Nadu?
+<label>1. Willing to work anywhere in Tamil Nadu?
   <select name="willing_tn" required>
     <option value="">Select</option>
     <option>Yes</option><option>No</option>
   </select>
 </label>
 
-<label>3. Preferred work location:
-  <input type="text" name="preferred_place">
+<label>2. Preferred work location:
+  <input type="text" name="preferred_place" required>
 </label>
 
-<label>4. Will you stay in site camp?
+<label>3. Will you stay in site camp?
   <select name="stay_in_camp" required>
     <option value="">Select</option>
     <option>Yes</option><option>No</option>
   </select>
 </label>
 
-<label>5. Vehicle owned:
-  <select name="vehicle_owned" id="vehicle_owned">
+<label>4. Vehicle owned:
+  <select name="vehicle_owned" id="vehicle_owned" required>
     <option value="">Select</option>
     <option>Two Wheeler</option>
     <option>Four Wheeler</option>
@@ -653,8 +646,8 @@ td:after,
 </label>
 
 <!-- 6-7 Problems -->
-<label>6. Any health problems?
-  <select name="health_problem" id="health_problem">
+<label>5. Any health problems?
+  <select name="health_problem" id="health_problem" required>
     <option value="">Select</option>
     <option>Yes</option><option>No</option>
   </select>
@@ -663,8 +656,8 @@ td:after,
   <input type="text" name="health_problem_details">
 </label>
 
-<label>7. Physically challenged?
-  <select name="physically_challenged" id="physically_challenged">
+<label>6. Physically challenged?
+  <select name="physically_challenged" id="physically_challenged" required>
     <option value="">Select</option>
     <option>Yes</option><option>No</option>
   </select>
@@ -674,21 +667,21 @@ td:after,
 </label>
 
 <!-- 8. Reason -->
-<label>8. Reason for leaving previous company:
-  <textarea name="reason_for_leaving" rows="3"></textarea>
+<label>7. Reason for leaving previous employement:
+  <textarea name="reason_for_leaving" rows="3" required></textarea>
 </label>
 
 <!-- 9. References -->
 <!-- 9. References -->
-<label>9. References:</label>
+<label>8. References:</label>
 
 <div id="referenceContainer">
   <div class="referenceRow">
    <!-- Use textarea with single-line styling -->
-<textarea name="ref_name[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="name"></textarea>
-<textarea name="ref_company[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Company"></textarea>
-<textarea name="ref_designation[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Designation"></textarea>
-<textarea name="ref_contact[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Contact No"></textarea>
+<textarea name="ref_name[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="name" ></textarea>
+<textarea name="ref_company[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Company" ></textarea>
+<textarea name="ref_designation[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Designation" ></textarea>
+<textarea name="ref_contact[]" rows="1" style="resize:none;height:42px;border-radius:6px;" placeholder="Contact No" ></textarea>
   </div>
 </div>
 
@@ -698,28 +691,30 @@ td:after,
 
 
 <!-- 10. Known Person -->
-<h3>10. Known person in P&C Group Of Companies</h3>
+<h3>9. Known person worked/working  in P&C Group Of Companies</h3>
 <label>Name:
-  <input type="text" name="known_person_name">
+  <input type="text" name="known_person_name" required>
 </label>
 
-<label>Relationship:
-  <select name="known_person_relationship" id="known_person_relationship">
+<label>How Related:
+  <select name="known_person_relationship" id="known_person_relationship" required>
     <option value="">Select</option>
     <option>Friend</option>
     <option>Relative</option>
     <option>Colleague</option>
+    <option>Cousin Brother</option>
+    <option>Cousin Sister</option>
   </select>
 </label>
 
 <div id="relativeDetail" style="display:none;">
-  <label>If Relative, specify:
-    <input type="text" name="relative_type">
+  <label>If Relative, specify: 
+    <input type="text" name="relative_type" >
   </label>
 </div>
 
-<label>Project they worked in P&C:
-  <input type="text" name="known_person_project">
+<label>Posted at which project in P&C:
+  <input type="text" name="known_person_project" required>
 </label>
 
 <!-- Resume Upload -->
@@ -762,7 +757,7 @@ td:after,
 
   <!-- ALL SCRIPTS REMAIN 100% UNCHANGED -->
   <script>
-   let educationDataArray = [];
+let educationDataArray = [];
 let experienceDataArray = [];
 let familyDataArray = [];
 let skillsDataArray = [];
@@ -835,23 +830,27 @@ function updateStreamOptions() {
 }
 
 function addEducationPreview() {
-  const qual = document.getElementById("qual").value === "Other"
+  const qualValue = document.getElementById("qual").value;
+  const qual = qualValue === "Other"
     ? document.getElementById("qual_other").value
-    : document.getElementById("qual").value;
+    : qualValue;
 
-  const stream = document.getElementById("stream").value === "Other"
+  const streamValue = document.getElementById("stream").value;
+  const stream = streamValue === "Other"
     ? document.getElementById("stream_other").value
-    : document.getElementById("stream").value;
+    : streamValue;
 
-  const medium = document.getElementById("medium").value === "Other"
+  const mediumValue = document.getElementById("medium").value;
+  const medium = mediumValue === "Other"
     ? document.getElementById("medium_other").value
-    : document.getElementById("medium").value;
+    : mediumValue;
 
   let boardOrUniversity = "";
-  if (qual === "SSLC" || qual === "HSC") {
-    boardOrUniversity = document.getElementById("board").value === "Other"
+  if (qualValue === "SSLC" || qualValue === "HSC") {
+    const boardValue = document.getElementById("board").value;
+    boardOrUniversity = boardValue === "Other"
       ? document.getElementById("board_other").value
-      : document.getElementById("board").value;
+      : boardValue;
   } else {
     boardOrUniversity = document.getElementById("board_university_input").value;
   }
@@ -862,7 +861,7 @@ function addEducationPreview() {
   const mode = document.getElementById("mode").value;
 
   if (!qual || !stream || !from || !to || !medium || !boardOrUniversity || !collegeSchool || !mode) {
-    alert("Please fill in all fields.");
+    alert("Please fill in all Education fields.");
     return;
   }
 
@@ -890,7 +889,6 @@ function addEducationPreview() {
   `;
   container.appendChild(line);
 
-  // Reset inputs
   document.getElementById("qual").value = "";
   const qo = document.getElementById("qual_other"); if (qo) { qo.value = ""; qo.style.display = "none"; }
 
@@ -931,16 +929,16 @@ function renumberEducation() {
 }
 
 function toggleExperienceTable() {
-    const statusEl = document.getElementById("experience_status");
-    const container = document.getElementById("experienceTableContainer");
-    if (!statusEl || !container) return;
-    const status = statusEl.value;
-    container.style.display = (status === "Experienced") ? "block" : "none";
-    if (status !== "Experienced") {
-        const ep = document.getElementById("experiencePreview"); if (ep) ep.innerHTML = "";
-        const te = document.getElementById("totalExperience"); if (te) te.value = "";
-        experienceDataArray = [];
-    }
+  const statusEl = document.getElementById("experience_status");
+  const container = document.getElementById("experienceTableContainer");
+  if (!statusEl || !container) return;
+  const status = statusEl.value;
+  container.style.display = (status === "Experienced") ? "block" : "none";
+  if (status !== "Experienced") {
+    const ep = document.getElementById("experiencePreview"); if (ep) ep.innerHTML = "";
+    const te = document.getElementById("totalExperience"); if (te) te.value = "";
+    experienceDataArray = [];
+  }
 }
 
 function escapeHtml(text) {
@@ -979,7 +977,7 @@ function addExperience() {
   const tomonth = document.getElementById("tomonth").value;
 
   if (!company || !role || !frommonth || !tomonth) {
-    alert("Please fill all required fields");
+    alert("Please fill all required Experience fields.");
     return;
   }
 
@@ -1032,11 +1030,9 @@ function removeExperience(btn) {
   const index = parseInt(li.getAttribute("data-index"));
   experienceDataArray.splice(index, 1);
   li.remove();
-  
   document.querySelectorAll("#experiencePreview li").forEach((item, idx) => {
     item.setAttribute("data-index", idx);
   });
-  
   calculateTotalExperience();
 }
 
@@ -1050,7 +1046,7 @@ function addFamilyPreview() {
   const ph = document.getElementById("fph").value;
 
   if (!name || !age || !rel || !occ || !marital || !loc || !ph) {
-    alert("Please fill in all family fields.");
+    alert("Please fill in all Family fields.");
     return;
   }
 
@@ -1084,9 +1080,6 @@ function addFamilyPreview() {
   document.getElementById("fph").value = "";
 }
 
-
- 
-
 function removeFamily(btn) {
   const line = btn.parentElement;
   const index = parseInt(line.getAttribute("data-index"));
@@ -1101,7 +1094,8 @@ function renumberFamily() {
   lines.forEach((line, index) => {
     familyCount++;
     line.setAttribute("data-index", index);
-    const strong = line.querySelector("strong"); if (strong) strong.innerText = `${index + 1}.`;
+    const strong = line.querySelector("strong"); 
+    if (strong) strong.innerText = `${index + 1}.`;
   });
 }
 
@@ -1134,7 +1128,7 @@ function addSkillPreview() {
   if (skill === "Other") {
     skill = otherSkillInput.value.trim();
     if (!skill) {
-      alert("Please enter a skill name for 'Other'");
+      alert("Please enter a skill name for 'Other'.");
       return;
     }
   }
@@ -1178,11 +1172,11 @@ function removeSkill(btn) {
 function renumberSkills() {
   const lines = document.querySelectorAll('#skillPreviewContainer .edu-preview-line');
   skillCount = 0;
-
   lines.forEach((line, index) => {
     skillCount++;
     line.setAttribute("data-index", index);
-    const strong = line.querySelector("strong"); if (strong) strong.innerText = `${skillCount}.`;
+    const strong = line.querySelector("strong"); 
+    if (strong) strong.innerText = `${skillCount}.`;
   });
 }
 
@@ -1196,7 +1190,7 @@ function addReference() {
   const contact = row.querySelector('textarea[name="ref_contact[]"]').value.trim();
 
   if (!name || !company || !designation || !contact) {
-    alert("Please fill all reference fields");
+    alert("Please fill all Reference fields.");
     return;
   }
 
@@ -1211,10 +1205,10 @@ function addReference() {
   preview.setAttribute("data-index", referencesDataArray.length - 1);
   preview.innerHTML = `
     <strong>${refCount}.</strong> 
-   ${escapeHtml(name)} | 
-   ${escapeHtml(company)} | 
+    ${escapeHtml(name)} | 
+    ${escapeHtml(company)} | 
     ${escapeHtml(designation)} | 
-     ${escapeHtml(contact)}
+    ${escapeHtml(contact)}
     <button type="button" onclick="removeReference(this)">✖</button>
   `;
   document.getElementById("referencePreview").appendChild(preview);
@@ -1237,7 +1231,8 @@ function reindexReferences() {
   refCount = 1;
   previews.forEach((el, idx) => {
     el.setAttribute("data-index", idx);
-    const strong = el.querySelector("strong"); if (strong) strong.innerText = `${idx + 1}.`;
+    const strong = el.querySelector("strong"); 
+    if (strong) strong.innerText = `${idx + 1}.`;
   });
   refCount = previews.length + 1;
 }
@@ -1250,88 +1245,118 @@ function toggleMarriageYear() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    updateStreamOptions();
+  updateStreamOptions();
 
-    const maritalEl = document.getElementById("marital_status"); 
-    if (maritalEl) maritalEl.addEventListener("change", toggleMarriageYear);
+  const maritalEl = document.getElementById("marital_status"); 
+  if (maritalEl) maritalEl.addEventListener("change", toggleMarriageYear);
 
-    const vehicleEl = document.getElementById("vehicle_owned"); 
-    if (vehicleEl) vehicleEl.addEventListener("change", function () {
-        const show = ["Two Wheeler", "Four Wheeler"].includes(this.value);
-        const licenseField = document.getElementById("licenseField"); 
-        if (licenseField) licenseField.style.display = show ? "block" : "none";
+  const vehicleEl = document.getElementById("vehicle_owned"); 
+  if (vehicleEl) vehicleEl.addEventListener("change", function () {
+    const show = ["Two Wheeler", "Four Wheeler"].includes(this.value);
+    const licenseField = document.getElementById("licenseField"); 
+    if (licenseField) licenseField.style.display = show ? "block" : "none";
+  });
+
+  const healthEl = document.getElementById("health_problem"); 
+  if (healthEl) healthEl.addEventListener("change", function () {
+    const healthDetails = document.getElementById("healthDetails"); 
+    if (healthDetails) healthDetails.style.display = this.value === "Yes" ? "block" : "none";
+  });
+
+  const physEl = document.getElementById("physically_challenged"); 
+  if (physEl) physEl.addEventListener("change", function () {
+    const physicalDetails = document.getElementById("physicalDetails"); 
+    if (physicalDetails) physicalDetails.style.display = this.value === "Yes" ? "block" : "none";
+  });
+
+  const knownRelEl = document.getElementById("known_person_relationship"); 
+  if (knownRelEl) knownRelEl.addEventListener("change", function () {
+    const relativeDetail = document.getElementById("relativeDetail"); 
+    if (relativeDetail) relativeDetail.style.display = this.value === "Relative" ? "block" : "none";
+  });
+
+  const langSpeakChk = document.getElementById("langSpeakOthersChk");
+  if (langSpeakChk) {
+    langSpeakChk.addEventListener("change", function () {
+      const otherSpeakGroup = document.getElementById("otherSpeakGroup"); 
+      if (otherSpeakGroup) otherSpeakGroup.style.display = this.checked ? "block" : "none";
     });
+  }
 
-    const healthEl = document.getElementById("health_problem"); 
-    if (healthEl) healthEl.addEventListener("change", function () {
-        const healthDetails = document.getElementById("healthDetails"); 
-        if (healthDetails) healthDetails.style.display = this.value === "Yes" ? "block" : "none";
+  const langWriteChk = document.getElementById("langWriteOthersChk");
+  if (langWriteChk) {
+    langWriteChk.addEventListener("change", function () {
+      const otherWriteGroup = document.getElementById("otherWriteGroup"); 
+      if (otherWriteGroup) otherWriteGroup.style.display = this.checked ? "block" : "none";
     });
+  }
 
-    const physEl = document.getElementById("physically_challenged"); 
-    if (physEl) physEl.addEventListener("change", function () {
-        const physicalDetails = document.getElementById("physicalDetails"); 
-        if (physicalDetails) physicalDetails.style.display = this.value === "Yes" ? "block" : "none";
-    });
+  const qualEl2 = document.getElementById("qual"); 
+  if (qualEl2) qualEl2.addEventListener("change", updateStreamOptions);
 
-    const knownRelEl = document.getElementById("known_person_relationship"); 
-    if (knownRelEl) knownRelEl.addEventListener("change", function () {
-        const relativeDetail = document.getElementById("relativeDetail"); 
-        if (relativeDetail) relativeDetail.style.display = this.value === "Relative" ? "block" : "none";
-    });
-
-    const langSpeakChk = document.getElementById("langSpeakOthersChk");
-    if (langSpeakChk) {
-      langSpeakChk.addEventListener("change", function () {
-        const otherSpeakGroup = document.getElementById("otherSpeakGroup"); 
-        if (otherSpeakGroup) otherSpeakGroup.style.display = this.checked ? "block" : "none";
-      });
-    }
-
-    const langWriteChk = document.getElementById("langWriteOthersChk");
-    if (langWriteChk) {
-      langWriteChk.addEventListener("change", function () {
-        const otherWriteGroup = document.getElementById("otherWriteGroup"); 
-        if (otherWriteGroup) otherWriteGroup.style.display = this.checked ? "block" : "none";
-      });
-    }
-
-    const qualEl2 = document.getElementById("qual"); 
-    if (qualEl2) qualEl2.addEventListener("change", updateStreamOptions);
+  const candidateFormEl = document.getElementById("candidateForm");
+  if (candidateFormEl) candidateFormEl.addEventListener("submit", submitCandidateForm);
 });
 
-const candidateFormEl = document.getElementById("candidateForm");
-if (candidateFormEl) candidateFormEl.addEventListener("submit", submitCandidateForm);
-
+/* MAIN SUBMIT FUNCTION – with extra preview validations */
 async function submitCandidateForm(event) {
   event.preventDefault();
   const form = document.getElementById("candidateForm");
   if (!form) return;
+
+  // 1. Mandatory preview validations
+  if (educationDataArray.length === 0) {
+    alert("Please add at least ONE Education entry before submitting.");
+    return;
+  }
+  if (familyDataArray.length === 0) {
+    alert("Please add at least ONE Family entry before submitting.");
+    return;
+  }
+  if (experienceDataArray.length === 0) {
+    alert("Please add at least ONE Experience entry before Submitting.");
+    return;
+  }
+  if (skillsDataArray.length === 0) {
+    alert("Please add at least ONE Skill entry before submitting.");
+    return;
+  }
+  if (referencesDataArray.length === 0) {
+    alert("Please add at least ONE Reference entry before submitting.");
+    return;
+  }
+
+  // 2. HTML5 required-field validation
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
   const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
   if (submitBtn) { submitBtn.disabled = true; }
   document.getElementById("loadingOverlay").style.display = "flex";
-  
+
   try {
     const formData = new FormData(form);
-    
+
     const aadharFile = document.getElementById("aadhar_upload").files[0];
     const photoFile = document.getElementById("photo_upload").files[0];
     const resumeFile = document.getElementById("resume_upload").files[0];
-    
+
     if (aadharFile) {
       const base64Aadhar = await fileToBase64(aadharFile);
       formData.append("aadhar_base64", base64Aadhar);
       formData.append("aadhar_name", aadharFile.name);
       formData.append("aadhar_type", aadharFile.type);
     }
-    
+
     if (photoFile) {
       const base64Photo = await fileToBase64(photoFile);
       formData.append("photo_base64", base64Photo);
       formData.append("photo_name", photoFile.name);
       formData.append("photo_type", photoFile.type);
     }
-    
+
     if (resumeFile) {
       const base64Resume = await fileToBase64(resumeFile);
       formData.append("resume_base64", base64Resume);
@@ -1343,67 +1368,59 @@ async function submitCandidateForm(event) {
       return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
         .map(el => el.value);
     }
-    let selectedSpeak = getCheckedValues("languageSpeak");
-    const otherSpeakInput = document.getElementById("otherSpeak");
-    const otherSpeakChecked = document.getElementById("langSpeakOthersChk")?.checked;
-    if (otherSpeakChecked && otherSpeakInput?.value.trim() !== "") {
-      selectedSpeak.push(otherSpeakInput.value.trim());
-    }
-    formData.append("languageSpeakCombined", selectedSpeak.join(", "));
-    
-    let selectedWrite = getCheckedValues("languageWrite");
-    const otherWriteInput = document.getElementById("otherWrite");
-    const otherWriteChecked = document.getElementById("langWriteOthersChk")?.checked;
-    if (otherWriteChecked && otherWriteInput?.value.trim() !== "") {
-      selectedWrite.push(otherWriteInput.value.trim());
-    }
-    formData.append("languageWriteCombined", selectedWrite.join(", "));
-    
-    console.log("Sending structured data:", {
-      education: educationDataArray,
-      experience: experienceDataArray,
-      family: familyDataArray,
-      skills: skillsDataArray,
-      references: referencesDataArray
-    });
-    
+
+    // SPEAK
+let selectedSpeak = getCheckedValues("languageSpeak");
+
+// if Others checked, only push actual text (not the word "Others")
+const otherSpeakChecked = document.getElementById("langSpeakOthersChk")?.checked;
+const otherSpeakInput = document.getElementById("otherSpeak");
+if (otherSpeakChecked && otherSpeakInput?.value.trim() !== "") {
+  selectedSpeak = selectedSpeak.filter(v => v !== "Others");
+  selectedSpeak.push(otherSpeakInput.value.trim());  // e.g. Kannada
+}
+formData.append("languageSpeakCombined", selectedSpeak.join(", "));
+
+// WRITE
+let selectedWrite = getCheckedValues("languageWrite");
+const otherWriteChecked = document.getElementById("langWriteOthersChk")?.checked;
+const otherWriteInput = document.getElementById("otherWrite");
+if (otherWriteChecked && otherWriteInput?.value.trim() !== "") {
+  selectedWrite = selectedWrite.filter(v => v !== "Others");
+  selectedWrite.push(otherWriteInput.value.trim());
+}
+formData.append("languageWriteCombined", selectedWrite.join(", "));
+
+
     formData.append("educationData", JSON.stringify(educationDataArray));
     formData.append("experienceData", JSON.stringify(experienceDataArray));
     formData.append("familyData", JSON.stringify(familyDataArray));
     formData.append("skillsData", JSON.stringify(skillsDataArray));
     formData.append("referencesData", JSON.stringify(referencesDataArray));
-    
+
     formData.append("marriage_year", document.getElementById("marriage_year")?.value || "");
     formData.append("health_problem_details", document.querySelector('input[name="health_problem_details"]')?.value || "");
     formData.append("physically_challenged_details", document.querySelector('input[name="physically_challenged_details"]')?.value || "");
     formData.append("relative_type", document.querySelector('input[name="relative_type"]')?.value || "");
 
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbzQsXkxTc2kZCWDZ3EuIM11OfnKBwgRssiCGxsr2tKfvO4fzC1ubJLKhRFGLckWpkA/exec";
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxnAjYOEji6hyRbUMQcaT6AeG_R5XNfSX5vqLf4NNWqhulH3ZAla_a8DEJY3u0QOLtg/exec";
     const response = await fetch(GAS_URL, { 
       method: "POST",
       body: formData,
     });
-    
+
     const data = await response.json();
-    
+
     if (data.result === "success") {
-      // Show success message with PDF link
       let successMessage = `✅ ${data.message || 'Form submitted successfully!'}\n\n`;
-      //successMessage += `📋 Application Number: ${data.rowNumber}\n\n`;
-      
       if (data.pdfUrl) {
         successMessage += `📄 Your Professional PDF has been generated!\n\n`;
-        //successMessage += `Click OK to view your application PDF.`;
         alert(successMessage);
-        
-        // Open PDF in new tab
-       
       } else {
         successMessage += `Your application has been saved successfully!`;
         alert(successMessage);
       }
-      
-      // Reset form
+
       form.reset();
       document.getElementById("educationPreviewContainer").innerHTML = "";
       document.getElementById("familyPreviewContainer").innerHTML = "";
@@ -1411,7 +1428,7 @@ async function submitCandidateForm(event) {
       document.getElementById("referencePreview").innerHTML = "";
       document.getElementById("experiencePreview").innerHTML = "";
       document.getElementById("totalExperience").value = "";
-      
+
       educationDataArray = [];
       experienceDataArray = [];
       familyDataArray = [];
@@ -1432,34 +1449,34 @@ async function submitCandidateForm(event) {
   }
 }
 
+/* PDF PREVIEW (unchanged except using current arrays) */
 function generateProfessionalPDF() {
   const { jsPDF } = window.jspdf;
-  
   if (!jsPDF) {
     alert("PDF library not loaded. Please refresh the page and try again.");
     return;
   }
 
   const doc = new jsPDF();
-  
+
   doc.setFontSize(18);
   doc.setFont(undefined, 'bold');
   doc.text("P&C PROJECTS PRIVATE LIMITED", 105, 15, { align: 'center' });
-  
+
   doc.setFontSize(14);
   doc.text("Candidate Application Form", 105, 23, { align: 'center' });
-  
+
   doc.setFontSize(11);
   doc.setFont(undefined, 'normal');
-  
+
   let y = 35;
-  
+
   const fullName = document.getElementById("full_name").value || "N/A";
   const dobYear = document.getElementById("dob_year").value || "N/A";
   const maritalStatus = document.getElementById("marital_status").value || "N/A";
   const appliedPost = document.getElementById("applied_post").value || "N/A";
   const phoneNo = document.getElementById("phone_no").value || "N/A";
-  
+
   doc.setFont(undefined, 'bold');
   doc.text("Personal Information", 14, y);
   y += 7;
@@ -1474,26 +1491,24 @@ function generateProfessionalPDF() {
   y += 6;
   doc.text(`Phone: ${phoneNo}`, 14, y);
   y += 10;
-  
+
   if (educationDataArray.length > 0) {
     doc.setFont(undefined, 'bold');
     doc.text("Education", 14, y);
     y += 7;
     doc.setFont(undefined, 'normal');
-    
     educationDataArray.forEach((edu, index) => {
       doc.text(`${index + 1}. ${edu.qual} - ${edu.stream} (${edu.from} to ${edu.to})`, 14, y);
       y += 6;
     });
     y += 4;
   }
-  
+
   if (experienceDataArray.length > 0) {
     doc.setFont(undefined, 'bold');
     doc.text("Experience", 14, y);
     y += 7;
     doc.setFont(undefined, 'normal');
-    
     experienceDataArray.forEach((exp, index) => {
       if (y > 270) {
         doc.addPage();
@@ -1504,7 +1519,7 @@ function generateProfessionalPDF() {
     });
     y += 4;
   }
-  
+
   if (skillsDataArray.length > 0) {
     if (y > 250) {
       doc.addPage();
@@ -1514,18 +1529,16 @@ function generateProfessionalPDF() {
     doc.text("Skills", 14, y);
     y += 7;
     doc.setFont(undefined, 'normal');
-    
     skillsDataArray.forEach((skill, index) => {
       doc.text(`${index + 1}. ${skill.skill} - ${skill.proficiency}`, 14, y);
       y += 6;
     });
   }
-  
+
   doc.save("Application_Preview.pdf");
   alert("✅ PDF Preview downloaded successfully!");
 }
-  </script>
+</script>
+
 </body>
 </html>
-
-
