@@ -1,0 +1,15 @@
+services:
+  # 1. Your Website
+  web:
+    build: .
+    container_name: my-static-site
+    restart: unless-stopped
+
+  # 2. Your Cloudflare Tunnel
+  tunnel:
+    image: cloudflare/cloudflared
+    container_name: my-tunnel
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiOWUxNGFkY2UzOGM0MDk4MmRhZDAxN2NlZmQ1YzczMmMiLCJ0IjoiN2E1Y2RhZTMtNDhiMS00Zjg5LWI0ZjctNjNkZTI3ZjMwZTk0IiwicyI6Ik9EazVOVEZtTkdNdE1UWXhOQzAwWmpjNExUazBOemN0WmpBNE9ESm1OelV6TURCayJ9
